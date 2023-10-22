@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Patterns.Observer;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class Level : MonoBehaviour {
 
     [SerializeField] int pointsPerLevel = 200;
     [SerializeField] private UnityEvent onLevelUp;
+    public event Action OnLevelUpAction;
     int experiencePoints = 0;
 
     private IEnumerator Start() {
@@ -21,6 +23,7 @@ public class Level : MonoBehaviour {
         experiencePoints += points;
         if (GetLevel() > level) {
             onLevelUp.Invoke();
+            OnLevelUpAction();
         }
     }
 

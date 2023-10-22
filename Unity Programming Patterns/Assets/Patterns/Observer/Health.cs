@@ -13,11 +13,19 @@ namespace Patterns.Observer {
             StartCoroutine(HealthDrain());
         }
 
+        private void OnEnable() {
+            GetComponent<Level>().OnLevelUpAction += ResetHealth;
+        }
+        
+        private void OnDisable() {
+            GetComponent<Level>().OnLevelUpAction -= ResetHealth;
+        }
+
         public float GetHealth() {
             return _currentHealth;
         }
 
-        public void ResetHealth() {
+        void ResetHealth() {
             _currentHealth = fullHealth;
         }
 
